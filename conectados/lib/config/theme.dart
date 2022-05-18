@@ -4,36 +4,36 @@ import 'package:flutter/material.dart';
 
 ThemeData theme() {
   return ThemeData(
-    primaryColor: Color(0xD86D6D),
-    primaryColorDark: Color(0x8B1616),
-    primaryColorLight: Color(0xFFD0D0),
+    primaryColor: Color(0x99C45151),
+    primaryColorDark: Color(0x99000000),
+    primaryColorLight: Color(0x33FFD0D0),
     scaffoldBackgroundColor: Colors.white,
-    backgroundColor: Color(0xF5F5F5),
+    backgroundColor: Color(0x33F5F5F5),
     fontFamily: 'Futura',
     textTheme: TextTheme(
       headline1: TextStyle(
-        color: Color(0xC45151),
+        color: Color(0x99C45151),
         fontWeight: FontWeight.bold,
         fontSize: 36,
       ),
       headline2: TextStyle(
-        color: Color(0xC45151),
+        color: Color(0x99C45151),
         fontWeight: FontWeight.bold,
         fontSize: 24,
       ),
       headline3: TextStyle(
-        color: Color(0xC45151),
+        color: Color(0x99C45151),
         fontWeight: FontWeight.bold,
         fontSize: 18,
       ),
       headline4: TextStyle(
-        color: Color(0xC45151),
+        color: Color(0x99C45151),
         fontWeight: FontWeight.bold,
         fontSize: 16,
       ),
       headline5: TextStyle(
-        color: Color(0xC45151),
-        fontWeight: FontWeight.bold,
+        color: Color(0x99C45151),
+        fontWeight: FontWeight.normal,
         fontSize: 14,
       ),
     ),
