@@ -33,6 +33,6 @@ class User extends Equatable {
           'https://scontent.fvvc1-1.fna.fbcdn.net/v/t1.6435-9/148043956_2878934002362955_6710291133745909311_n.jpg?_nc_cat=110&ccb=1-6&_nc_sid=174925&_nc_eui2=AeHM459rQhltecZX9MvgomRR7DoolXkGcl3sOiiVeQZyXS2WgfSSF9I1v3juVLyyeK7_X4V9yqIg8izjCX2NPkgq&_nc_ohc=2Lo5GdRn-dAAX_KKDfY&_nc_ht=scontent.fvvc1-1.fna&oh=00_AT9k2FU7W2ujDkrqdom7lxGPVtZ09-aKN8DZAtib_wDVuA&oe=62AAB6EC',
         ],
         bio: 'Soul Gazing',
-        jobTitle: 'empleo')
+        jobTitle: 'Novia de Cristian :v')
   ];
 }
