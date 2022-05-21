@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 class ChoiceButton extends StatelessWidget {
@@ -34,6 +36,7 @@ class ChoiceButton extends StatelessWidget {
                   ],
                 )
               : LinearGradient(
+                  // ignore: prefer_const_literals_to_create_immutables
                   colors: [
                     Colors.white,
                     Colors.white,

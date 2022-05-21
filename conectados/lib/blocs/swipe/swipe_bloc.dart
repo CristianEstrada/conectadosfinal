@@ -13,11 +13,12 @@ class SwipeBloc extends Bloc<SwipeEvent, SwipeState> {
 
   @override
   Stream<SwipeState> mapEventToState(
-    SwipeState event,
+    SwipeEvent event,
   ) async* {
     if (event is LoadUsersEvent) {
       yield* _mapLoadUsersToState(event);
-    } else if (event is SwipeLeftEvent) {
+    }
+    if (event is SwipeLeftEvent) {
       yield* _mapSwipeLeftToState(event, state);
     }
     if (event is SwipeRightEvent) {

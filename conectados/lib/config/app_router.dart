@@ -1,13 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:conectados/screens/screens.dart';
 
 class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {
-    print('La ruta es: ${settings.name}');
-
     switch (settings.name) {
       case '/':
         return HomeScreen.route();

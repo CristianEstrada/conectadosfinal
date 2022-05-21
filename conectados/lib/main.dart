@@ -5,7 +5,7 @@ import 'package:conectados/config/app_router.dart';
 import 'package:conectados/models/models.dart';
 import 'package:conectados/screens/screens.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'config/theme.dart';
 
 void main() {
