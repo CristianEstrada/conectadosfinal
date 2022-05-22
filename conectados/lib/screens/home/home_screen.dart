@@ -33,7 +33,7 @@ class HomeScreen extends StatelessWidget {
               children: [
                 Draggable(
                   feedback: UserCard(user: state.users[0]),
-                  childWhenDragging: UserCard(user: state.users[1]),
+                  childWhenDragging: UserCard(user: state.users[0]),
                   child: UserCard(user: state.users[0]),
                   onDragEnd: (drag) {
                     if (drag.velocity.pixelsPerSecond.dx < 0) {
@@ -53,20 +53,34 @@ class HomeScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ChoiceButton(
-                          width: 60,
-                          height: 60,
-                          size: 25,
-                          hasGradient: false,
-                          color: Theme.of(context).primaryColor,
-                          icon: Icons.clear_rounded),
-                      ChoiceButton(
-                          width: 80,
-                          height: 80,
-                          size: 30,
-                          hasGradient: true,
-                          color: Colors.white,
-                          icon: Icons.favorite),
+                      InkWell(
+                        onTap: () {
+                          context
+                              .read<SwipeBloc>()
+                              .add(SwipeLeftEvent(user: state.users[0]));
+                        },
+                        child: ChoiceButton(
+                            width: 60,
+                            height: 60,
+                            size: 25,
+                            hasGradient: false,
+                            color: Theme.of(context).primaryColor,
+                            icon: Icons.clear_rounded),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          context
+                              .read<SwipeBloc>()
+                              .add(SwipeRightEvent(user: state.users[0]));
+                        },
+                        child: ChoiceButton(
+                            width: 80,
+                            height: 80,
+                            size: 30,
+                            hasGradient: true,
+                            color: Colors.white,
+                            icon: Icons.favorite),
+                      ),
                       ChoiceButton(
                           width: 60,
                           height: 60,
