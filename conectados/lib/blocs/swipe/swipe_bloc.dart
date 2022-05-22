@@ -16,7 +16,9 @@ class SwipeBloc extends Bloc<SwipeEvent, SwipeState> {
     SwipeEvent event,
   ) async* {
     if (event is LoadUsersEvent) {
-      yield* _mapLoadUsersToState(event);
+      yield* _mapLoadUsersToState(
+        event,
+      );
     }
     if (event is SwipeLeftEvent) {
       yield* _mapSwipeLeftToState(event, state);
