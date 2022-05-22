@@ -33,7 +33,7 @@ class HomeScreen extends StatelessWidget {
               children: [
                 Draggable(
                   feedback: UserCard(user: state.users[0]),
-                  childWhenDragging: UserCard(user: state.users[0]),
+                  childWhenDragging: UserCard(user: state.users[1]),
                   child: UserCard(user: state.users[0]),
                   onDragEnd: (drag) {
                     if (drag.velocity.pixelsPerSecond.dx < 0) {

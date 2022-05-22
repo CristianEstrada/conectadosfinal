@@ -1,10 +1,11 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors
 
+import 'package:conectados/models/models.dart';
+import 'package:conectados/widgets/choice_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class UserScreen extends StatelessWidget {
-  static const String routeName = "/UserScreen";
+  static const String routeName = "/users";
 
   UserScreen({Key? key}) : super(key: key);
 
@@ -19,18 +20,49 @@ class UserScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: Row(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
+      extendBodyBehindAppBar: true,
+      body: SizedBox(
+          height: MediaQuery.of(context).size.height / 2,
+          child: Stack(
             children: [
-              SvgPicture.asset(
-                'assets/logo.svg',
-                height: 50,
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.0),
+                    image: DecorationImage(
+                      image: NetworkImage(User.users[0].imageUrls[0]),
+                      fit: BoxFit.cover,
+                    )),
               ),
-              Text(
-                'CONECTADOS',
-                style: Theme.of(context).textTheme.headline2,
-              )
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 60),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ChoiceButton(
+                        color: Theme.of(context).primaryColorDark,
+                        icon: Icons.clear_rounded,
+                      ),
+                      ChoiceButton(
+                        height: 80,
+                        width: 80,
+                        size: 30,
+                        hasGradient: true,
+                        color: Colors.white,
+                        icon: Icons.favorite,
+                      ),
+                      ChoiceButton(
+                        color: Theme.of(context).primaryColor,
+                        icon: Icons.watch_later,
+                      )
+                    ],
+                  ),
+                ),
+              ),
             ],
           )),
     );
