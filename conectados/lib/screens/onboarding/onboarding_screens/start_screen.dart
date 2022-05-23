@@ -39,7 +39,9 @@ class Start extends StatelessWidget {
                   ),
             ),
           ]),
-          CustomButton(tabController: tabController),
+          CustomButton(
+            tabController: tabController,
+          ),
         ],
       ),
     );

@@ -4,17 +4,19 @@ import 'package:flutter/material.dart';
 
 class CustomTextHeader extends StatelessWidget {
   final TabController tabController;
+  final String text;
 
   const CustomTextHeader({
     Key? key,
     required this.tabController,
+    required this.text,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
-      child: Container(),
-    );
+    return Text(text,
+        style: Theme.of(context).textTheme.headline1!.copyWith(
+              fontWeight: FontWeight.normal,
+            ));
   }
 }

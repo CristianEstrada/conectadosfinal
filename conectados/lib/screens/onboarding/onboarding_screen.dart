@@ -18,6 +18,7 @@ class OnboardingScreen extends StatelessWidget {
 
   static const List<Tab> tabs = <Tab>[
     Tab(text: 'Inicio'),
+    Tab(text: 'Email'),
   ];
   @override
   Widget build(BuildContext context) {
@@ -35,6 +36,9 @@ class OnboardingScreen extends StatelessWidget {
           ),
           body: TabBarView(children: [
             Start(
+              tabController: tabController,
+            ),
+            Email(
               tabController: tabController,
             )
           ]),
