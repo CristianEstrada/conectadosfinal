@@ -36,6 +36,11 @@ ThemeData theme() {
         fontWeight: FontWeight.normal,
         fontSize: 14,
       ),
+      headline6: TextStyle(
+        color: Color(0x99C45151),
+        fontWeight: FontWeight.normal,
+        fontSize: 12,
+      ),
     ),
   );
 }

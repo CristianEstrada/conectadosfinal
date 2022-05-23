@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, use_key_in_widget_constructors
 
 import 'package:conectados/models/models.dart';
 import 'package:conectados/widgets/choice_button.dart';
@@ -8,18 +8,19 @@ import 'package:flutter/services.dart';
 class UserScreen extends StatelessWidget {
   static const String routeName = "/users";
 
-  UserScreen({Key? key}) : super(key: key);
-
-  static Route route() {
+  static Route route({required User user}) {
     return MaterialPageRoute(
       settings: RouteSettings(name: routeName),
-      builder: (context) => UserScreen(),
+      builder: (context) => UserScreen(user: user),
     );
   }
 
+  final User user;
+
+  const UserScreen({required this.user});
+
   @override
   Widget build(BuildContext context) {
-    final User user = User.users[0];
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -35,13 +36,16 @@ class UserScreen extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(bottom: 40.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15.0),
-                          image: DecorationImage(
-                            image: NetworkImage(User.users[0].imageUrls[0]),
-                            fit: BoxFit.cover,
-                          )),
+                    child: Hero(
+                      tag: "user_image",
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15.0),
+                            image: DecorationImage(
+                              image: NetworkImage(user.imageUrls[0]),
+                              fit: BoxFit.cover,
+                            )),
+                      ),
                     ),
                   ),
                   Align(
@@ -76,26 +80,71 @@ class UserScreen extends StatelessWidget {
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text('${user.name}, ${user.age}',
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${user.name}, ${user.age}',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline1!
+                      .copyWith(color: Colors.black),
+                ),
+                Text(
+                  '${user.jobTitle}',
+                  style: Theme.of(context).textTheme.headline2!.copyWith(
+                      fontWeight: FontWeight.normal, color: Colors.black),
+                ),
+                SizedBox(height: 15),
+                Text(
+                  'Sobre mi',
                   style: Theme.of(context)
                       .textTheme
                       .headline2!
-                      .copyWith(color: Colors.black)),
-              Text('${user.jobTitle}',
-                  style: Theme.of(context).textTheme.headline3!.copyWith(
-                      fontWeight: FontWeight.normal, color: Colors.black)),
-              SizedBox(height: 15),
-              Text('About',
-                  style: Theme.of(context).textTheme.headline3!
-                    ..copyWith(color: Colors.black)),
-              Text('${user.bio}',
+                      .copyWith(color: Colors.black),
+                ),
+                Text(
+                  '${user.bio}',
+                  style: Theme.of(context).textTheme.headline4!.copyWith(
+                      fontWeight: FontWeight.normal,
+                      height: 2,
+                      color: Colors.black54),
+                ),
+                Text(
+                  'Intereses',
                   style: Theme.of(context)
                       .textTheme
-                      .headline5!
-                      .copyWith(fontWeight: FontWeight.normal, height: 2)),
-            ]),
+                      .headline3!
+                      .copyWith(color: Colors.black),
+                ),
+                Row(
+                  children: user.interests
+                      .map(
+                        (interest) => Container(
+                          padding: const EdgeInsets.all(5.0),
+                          margin: const EdgeInsets.only(top: 5.0, right: 5.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                            gradient: LinearGradient(
+                              colors: [
+                                Theme.of(context).primaryColor,
+                                Theme.of(context).primaryColorDark
+                              ],
+                            ),
+                          ),
+                          child: Text(
+                            interest,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5!
+                                .copyWith(color: Colors.white),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ],
+            ),
           )
         ],
       ),
