@@ -3,6 +3,7 @@
 import 'package:conectados/screens/onboarding/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class Email extends StatelessWidget {
   final TabController tabController;
@@ -29,7 +30,21 @@ class Email extends StatelessWidget {
                   text: 'INGRESA TU CORREO ELECTRONICO'),
             ],
           ),
-          CustomButton(tabController: tabController, text: 'Siguiente paso'),
+          Column(
+            children: [
+              StepProgressIndicator(
+                totalSteps: 6,
+                currentStep: 1,
+                selectedColor: Theme.of(context).primaryColorDark,
+                unselectedColor: Theme.of(context).backgroundColor,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              CustomButton(
+                  tabController: tabController, text: 'Siguiente paso'),
+            ],
+          ),
         ],
       ),
     );
