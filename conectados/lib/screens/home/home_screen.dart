@@ -31,21 +31,27 @@ class HomeScreen extends StatelessWidget {
           } else if (state is SwipeLoaded) {
             return Column(
               children: [
-                Draggable(
-                  feedback: UserCard(user: state.users[0]),
-                  childWhenDragging: UserCard(user: state.users[0]),
-                  child: UserCard(user: state.users[0]),
-                  onDragEnd: (drag) {
-                    if (drag.velocity.pixelsPerSecond.dx < 0) {
-                      context
-                          .read<SwipeBloc>()
-                          .add(SwipeLeftEvent(user: state.users[0]));
-                    } else {
-                      context
-                          .read<SwipeBloc>()
-                          .add(SwipeRightEvent(user: state.users[0]));
-                    }
+                InkWell(
+                  onDoubleTap: () {
+                    Navigator.pushNamed(context, '/users',
+                        arguments: state.users[0]);
                   },
+                  child: Draggable(
+                    feedback: UserCard(user: state.users[0]),
+                    childWhenDragging: UserCard(user: state.users[1]),
+                    child: UserCard(user: state.users[0]),
+                    onDragEnd: (drag) {
+                      if (drag.velocity.pixelsPerSecond.dx < 0) {
+                        context
+                            .read<SwipeBloc>()
+                            .add(SwipeLeftEvent(user: state.users[0]));
+                      } else {
+                        context
+                            .read<SwipeBloc>()
+                            .add(SwipeRightEvent(user: state.users[0]));
+                      }
+                    },
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
