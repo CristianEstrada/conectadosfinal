@@ -26,7 +26,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             ),
           ),
           Expanded(
-            flex: 2,
+            flex: 3,
             child: Text(
               title,
               style: Theme.of(context).textTheme.headline2,
