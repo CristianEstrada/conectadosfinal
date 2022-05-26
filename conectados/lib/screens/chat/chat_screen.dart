@@ -50,10 +50,9 @@ class ChatScreen extends StatelessWidget {
                             ? Align(
                                 alignment: Alignment.topRight,
                                 child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5)),
-                                  child: Text(userMatch
-                                      .chat![0].messages[index].message),
+                                  decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)),
+                                  child: Text(
+                                      userMatch.chat![0].messages[index].message),
                                 ))
                             : Text(userMatch.chat![0].messages[index].message),
                       );
