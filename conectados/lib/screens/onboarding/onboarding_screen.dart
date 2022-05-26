@@ -36,6 +36,7 @@ class OnboardingScreen extends StatelessWidget {
         return Scaffold(
           appBar: CustomAppBar(
             title: 'CONECTADOS',
+            iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
             hasActions: false,
           ),
           body: TabBarView(children: [

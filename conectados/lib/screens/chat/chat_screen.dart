@@ -1,38 +1,65 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, use_key_in_widget_constructors
 
+import 'package:conectados/models/models.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import '../../widgets/widgets.dart';
 
 class ChatScreen extends StatelessWidget {
-  static const String routeName = "/ChatScreen";
+  static const String routeName = "/chat";
 
-  ChatScreen({Key? key}) : super(key: key);
-
-  static Route route() {
+  static Route route({required UserMatch userMatch}) {
     return MaterialPageRoute(
       settings: RouteSettings(name: routeName),
-      builder: (context) => ChatScreen(),
+      builder: (context) => ChatScreen(userMatch: userMatch),
     );
   }
+
+  final UserMatch userMatch;
+  const ChatScreen({required this.userMatch});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: Row(
-            children: [
-              SvgPicture.asset(
-                'assets/logo.svg',
-                height: 50,
-              ),
-              Text(
-                'CONECTADOS',
-                style: Theme.of(context).textTheme.headline2,
-              )
-            ],
-          )),
+        backgroundColor: Theme.of(context).backgroundColor,
+        elevation: 0,
+        iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
+        title: Column(
+          children: [
+            CircleAvatar(
+              radius: 15,
+              backgroundImage: NetworkImage(userMatch.matchedUser.imageUrls[0]),
+            ),
+            Text(userMatch.matchedUser.name,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline4!
+                    .copyWith(color: Colors.black87))
+          ],
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: userMatch.chat != null
+            ? Container(
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: userMatch.chat![0].messages.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: userMatch.chat![0].messages[index].senderId == 1
+                            ? Align(
+                                alignment: Alignment.topRight,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Text(userMatch
+                                      .chat![0].messages[index].message),
+                                ))
+                            : Text(userMatch.chat![0].messages[index].message),
+                      );
+                    }))
+            : SizedBox(),
+      ),
     );
   }
 }

@@ -23,6 +23,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         title: 'CONECTADOS',
+        iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
       ),
       body: BlocBuilder<SwipeBloc, SwipeState>(
         builder: (context, state) {

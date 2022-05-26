@@ -8,7 +8,7 @@ ThemeData theme() {
     primaryColorDark: Color(0x99000000),
     primaryColorLight: Color(0x33FFD0D0),
     scaffoldBackgroundColor: Colors.white,
-    backgroundColor: Color(0x33F5F5F5),
+    backgroundColor: Color(0x99C45151),
     fontFamily: 'Futura',
     textTheme: TextTheme(
       headline1: TextStyle(

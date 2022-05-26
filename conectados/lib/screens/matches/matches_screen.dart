@@ -28,7 +28,10 @@ class MatchesScreen extends StatelessWidget {
         .where((match) => match.userId == 1 && match.chat!.isNotEmpty)
         .toList();
     return Scaffold(
-      appBar: CustomAppBar(title: 'ENCUENTROS'),
+      appBar: CustomAppBar(
+        title: 'ENCUENTROS',
+        iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -80,38 +83,54 @@ class MatchesScreen extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: activeMatches.length,
                 itemBuilder: (context, index) {
-                  return Row(
-                    children: [
-                      UserImageSmall(
-                        height: 70,
-                        width: 70,
-                        url: activeMatches[index].matchedUser.imageUrls[0],
-                      ),
-                      Column(
-                        children: [
-                          Text(activeMatches[index].matchedUser.name,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline5!
-                                  .copyWith(color: Colors.black87)),
-                          Text(
-                              activeMatches[index].chat![0].messages[0].message,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline6!
-                                  .copyWith(color: Colors.black54)),
-                          Text(
-                              activeMatches[index]
-                                  .chat![0]
-                                  .messages[0]
-                                  .timeString,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline5!
-                                  .copyWith(color: Colors.black87)),
-                        ],
-                      )
-                    ],
+                  return InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/chat',
+                          arguments: activeMatches[index]);
+                    },
+                    child: Row(
+                      children: [
+                        UserImageSmall(
+                          height: 70,
+                          width: 70,
+                          url: activeMatches[index].matchedUser.imageUrls[0],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(activeMatches[index].matchedUser.name,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline5!
+                                    .copyWith(color: Colors.black87)),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                                activeMatches[index]
+                                    .chat![0]
+                                    .messages[0]
+                                    .message,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6!
+                                    .copyWith(color: Colors.black54)),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                                activeMatches[index]
+                                    .chat![0]
+                                    .messages[0]
+                                    .timeString,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .copyWith(color: Colors.black54)),
+                          ],
+                        )
+                      ],
+                    ),
                   );
                 },
               )
