@@ -15,10 +15,13 @@ class AppRouter {
         return MatchesScreen.route();
       case OnboardingScreen.routeName:
         return OnboardingScreen.route();
+      case ProfileScreen.routeName:
+        return ProfileScreen.route();
       case UserScreen.routeName:
         return UserScreen.route(user: settings.arguments as User);
       case ChatScreen.routeName:
         return ChatScreen.route(userMatch: settings.arguments as UserMatch);
+
       default:
         return _errorRoute();
     }

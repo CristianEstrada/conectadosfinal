@@ -37,26 +37,18 @@ class Biography extends StatelessWidget {
                   text: '¿Cuales Son Tus Preferencias?'),
               Row(
                 children: [
-                  CustomTextContainer(
-                      tabController: tabController, text: 'MUSICA'),
-                  CustomTextContainer(
-                      tabController: tabController, text: 'ARTE'),
-                  CustomTextContainer(
-                      tabController: tabController, text: 'SALIR'),
-                  CustomTextContainer(
-                      tabController: tabController, text: 'POLITICA'),
+                  CustomTextContainer(text: 'MUSICA'),
+                  CustomTextContainer(text: 'ARTE'),
+                  CustomTextContainer(text: 'SALIR'),
+                  CustomTextContainer(text: 'POLITICA'),
                 ],
               ),
               Row(
                 children: [
-                  CustomTextContainer(
-                      tabController: tabController, text: 'MASCOTAS'),
-                  CustomTextContainer(
-                      tabController: tabController, text: 'JUEGOS'),
-                  CustomTextContainer(
-                      tabController: tabController, text: 'PELICULAS'),
-                  CustomTextContainer(
-                      tabController: tabController, text: 'NATURALEZA'),
+                  CustomTextContainer(text: 'MASCOTAS'),
+                  CustomTextContainer(text: 'JUEGOS'),
+                  CustomTextContainer(text: 'PELICULAS'),
+                  CustomTextContainer(text: 'NATURALEZA'),
                 ],
               ),
             ],

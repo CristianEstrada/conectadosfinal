@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         title: 'Conectados',
         theme: theme(),
         onGenerateRoute: AppRouter.onGenerateRoute,
-        initialRoute: MatchesScreen.routeName,
+        initialRoute: ProfileScreen.routeName,
       ),
     );
   }
