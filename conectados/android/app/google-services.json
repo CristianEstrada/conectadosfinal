@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "772901558805",
+    "project_id": "conectados-app-a3bd2",
+    "storage_bucket": "conectados-app-a3bd2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:772901558805:android:9e7022fd4318792a110c1c",
+        "android_client_info": {
+          "package_name": "com.example.conectados"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "772901558805-mcnujjfpl0mlmannl4gdaenpva55vc0h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQDkl_P_EEZDqwtoEJe_LU8TIewWhyRCw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "772901558805-mcnujjfpl0mlmannl4gdaenpva55vc0h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "772901558805-lfldffv9cm8t93quq0javffhn5ujpf0g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.company.conectados"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

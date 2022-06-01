@@ -2,7 +2,6 @@
 
 import 'package:conectados/screens/onboarding/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class Email extends StatelessWidget {
@@ -15,19 +14,31 @@ class Email extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomTextHeader(
-                  tabController: tabController,
-                  text: '¿Cual Es Tu Dirección De Correo Electronico?'),
+                text: '¿Cual Es Tu Dirección De Correo Electronico?',
+              ),
               CustomTextField(
-                  tabController: tabController,
-                  text: 'INGRESA TU CORREO ELECTRONICO'),
+                  hint: 'INGRESA TU CORREO ELECTRONICO',
+                  controller: emailController),
+              SizedBox(
+                height: 100,
+              ),
+              CustomTextHeader(
+                text: '¿Crea Tu Contraseña?',
+              ),
+              CustomTextField(
+                  hint: 'INGRESA TU CONTRASEÑA',
+                  controller: passwordController),
             ],
           ),
           Column(
@@ -42,7 +53,10 @@ class Email extends StatelessWidget {
                 height: 10,
               ),
               CustomButton(
-                  tabController: tabController, text: 'Siguiente paso'),
+                  tabController: tabController,
+                  text: 'Siguiente paso',
+                  emailController: emailController,
+                  passwordController: passwordController),
             ],
           ),
         ],

@@ -15,6 +15,7 @@ class Biography extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = TextEditingController();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
       child: Column(
@@ -23,18 +24,13 @@ class Biography extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomTextHeader(
-                  tabController: tabController,
-                  text: 'Escribe Como Te Perciben Las Personas'),
+              CustomTextHeader(text: 'Escribe Como Te Perciben Las Personas'),
               CustomTextField(
-                  tabController: tabController,
-                  text: 'INGRESA TU PRESENTACIÓN'),
+                  hint: 'INGRESA TU PRESENTACIÓN', controller: controller),
               SizedBox(
                 height: 100,
               ),
-              CustomTextHeader(
-                  tabController: tabController,
-                  text: '¿Cuales Son Tus Preferencias?'),
+              CustomTextHeader(text: '¿Cuales Son Tus Preferencias?'),
               Row(
                 children: [
                   CustomTextContainer(text: 'MUSICA'),

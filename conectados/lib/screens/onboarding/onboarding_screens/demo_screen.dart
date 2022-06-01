@@ -15,6 +15,7 @@ class Demo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = TextEditingController();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
       child: Column(
@@ -23,18 +24,15 @@ class Demo extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomTextHeader(
-                  tabController: tabController, text: '¿Cual Es Tu Genero?'),
+              CustomTextHeader(text: '¿Cual Es Tu Genero?'),
               SizedBox(
                 height: 10,
               ),
               CustomCheckbox(tabController: tabController, text: 'Masculino'),
               CustomCheckbox(tabController: tabController, text: 'Femenino'),
               SizedBox(height: 100),
-              CustomTextHeader(
-                  tabController: tabController, text: '¿Cual Es Tu Edad?'),
-              CustomTextField(
-                  tabController: tabController, text: 'INGRESA TU EDAD'),
+              CustomTextHeader(text: '¿Cual Es Tu Edad?'),
+              CustomTextField(hint: 'INGRESA TU EDAD', controller: controller),
             ],
           ),
           Column(
