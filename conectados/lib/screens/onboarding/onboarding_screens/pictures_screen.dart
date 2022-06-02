@@ -23,9 +23,7 @@ class PicturesScreen extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomTextHeader(
-                  tabController: tabController,
-                  text: 'Agrega 2 o mas imagenes'),
+              CustomTextHeader(text: 'Agrega 2 o mas imagenes'),
               SizedBox(height: 10),
               Row(
                 children: [
