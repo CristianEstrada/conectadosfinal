@@ -14,7 +14,11 @@ class SignupState extends Equatable {
   });
 
   factory SignupState.initial() {
-    return SignupState(email: '', password: '', status: SignupStatus.initial);
+    return SignupState(
+      email: '',
+      password: '',
+      status: SignupStatus.initial,
+    );
   }
   SignupState copyWith({
     String? email,

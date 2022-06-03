@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables
 
+import 'package:conectados/repositories/auth_repository.dart';
 import 'package:conectados/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../cubits/signup/signup_cubit.dart';
 import 'onboarding_screens/screens.dart';
 
 class OnboardingScreen extends StatelessWidget {
@@ -12,7 +15,11 @@ class OnboardingScreen extends StatelessWidget {
   static Route route() {
     return MaterialPageRoute(
       settings: RouteSettings(name: routeName),
-      builder: (context) => OnboardingScreen(),
+      builder: (context) => BlocProvider(
+        create: (_) =>
+            SignupCubit(authRepository: context.read<AuthRepository>()),
+        child: OnboardingScreen(),
+      ),
     );
   }
 
