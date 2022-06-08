@@ -1,4 +1,4 @@
-import 'package:conectados/repositories/base_auth_repository.dart';
+import 'package:conectados/repositories/auth/base_auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 class AuthRepository extends BaseAuthRepository {

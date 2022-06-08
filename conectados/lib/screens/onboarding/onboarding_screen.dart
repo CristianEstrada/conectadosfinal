@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables
 
-import 'package:conectados/repositories/auth_repository.dart';
+import 'package:conectados/repositories/auth/auth_repository.dart';
 import 'package:conectados/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

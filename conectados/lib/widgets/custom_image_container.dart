@@ -1,15 +1,16 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
+import 'package:conectados/repositories/storage/storage_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CustomImageContainer extends StatelessWidget {
-  final TabController tabController;
-
   const CustomImageContainer({
     Key? key,
-    required this.tabController,
+    this.imageUrl,
   }) : super(key: key);
 
+  final String? imageUrl;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,14 +27,30 @@ class CustomImageContainer extends StatelessWidget {
             right: BorderSide(color: Theme.of(context).primaryColor, width: 1),
           ),
         ),
-        child: Align(
-          alignment: Alignment.bottomRight,
-          child: IconButton(
-            icon: Icon(Icons.add_circle,
-                color: Theme.of(context).primaryColorDark),
-            onPressed: () {},
-          ),
-        ),
+        child: (imageUrl == null)
+            ? Align(
+                alignment: Alignment.bottomRight,
+                child: IconButton(
+                  icon: Icon(Icons.add_circle,
+                      color: Theme.of(context).primaryColorDark),
+                  onPressed: () async {
+                    ImagePicker _picker = ImagePicker();
+                    final XFile? _image =
+                        await _picker.pickImage(source: ImageSource.gallery);
+                    if (_image == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('No hay imagen seleccionada'),
+                        ),
+                      );
+                    }
+                    if (_image != null) {
+                      StorageRepository().uploadImage(_image);
+                    }
+                  },
+                ),
+              )
+            : Image.network(imageUrl!, fit: BoxFit.cover),
       ),
     );
   }

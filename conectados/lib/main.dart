@@ -2,9 +2,11 @@
 
 import 'package:conectados/blocs/auth/auth_bloc.dart';
 import 'package:conectados/blocs/swipe/swipe_bloc.dart';
+import 'package:conectados/blocs/images/images_bloc.dart';
 import 'package:conectados/config/app_router.dart';
 import 'package:conectados/models/models.dart';
-import 'package:conectados/repositories/auth_repository.dart';
+import 'package:conectados/repositories/auth/auth_repository.dart';
+import 'package:conectados/repositories/database/database_repository.dart';
 import 'package:conectados/screens/onboarding/onboarding_screen.dart';
 import 'package:conectados/screens/screens.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -44,6 +46,13 @@ class MyApp extends StatelessWidget {
                 ),
               ),
           ),
+          BlocProvider(
+            create: (_) => ImagesBloc(
+              databaseRepository: DatabaseRepository(),
+            )..add(
+                LoadImages(),
+              ),
+          )
         ],
         child: MaterialApp(
           title: 'Conectados',
