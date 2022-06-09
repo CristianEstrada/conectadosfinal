@@ -1,16 +1,14 @@
-// ignore_for_file: prefer_const_constructors
-
-import 'package:conectados/blocs/blocs.dart';
-import 'package:conectados/config/app_router.dart';
-import 'package:conectados/cubits/cubits.dart';
-import 'package:conectados/models/models.dart';
-import 'package:conectados/repositories/repositories.dart';
-import 'package:conectados/screens/onboarding/onboarding_screen.dart';
-
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'blocs/blocs.dart';
+import 'cubits/cubits.dart';
+import 'repositories/repositories.dart';
+import 'screens/screens.dart';
 import 'config/theme.dart';
+import 'config/app_router.dart';
+import 'models/models.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,21 +17,13 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
           create: (context) => AuthRepository(),
-        ),
-        RepositoryProvider(
-          create: (context) => DatabaseRepository(),
-        ),
-        RepositoryProvider(
-          create: (context) => StorageRepository(),
-        ),
+        )
       ],
       child: MultiBlocProvider(
         providers: [
@@ -48,33 +38,25 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<OnboardingBloc>(
             create: (context) => OnboardingBloc(
-              databaseRepository: context.read<DatabaseRepository>(),
-              storageRepository: context.read<StorageRepository>(),
+              databaseRepository: DatabaseRepository(),
+              storageRepository: StorageRepository(),
             ),
           ),
           BlocProvider(
-              create: (context) => SwipeBloc(
-                    authBloc: BlocProvider.of<AuthBloc>(context),
-                    databaseRepository: context.read<DatabaseRepository>(),
-                  )
-              //BlocProvider.of<AuthBloc>(context).state.user!.uid),
-              ),
-          BlocProvider(
-            create: (context) => ProfileBloc(
-              authBloc: BlocProvider.of<AuthBloc>(context),
-              databaseRepository: context.read<DatabaseRepository>(),
-            )..add(
-                LoadProfile(
-                    userId: BlocProvider.of<AuthBloc>(context).state.user!.uid),
+            create: (context) => SwipeBloc()
+              ..add(
+                LoadUsersEvent(
+                  users: User.users.where((user) => user.id != 1).toList(),
+                ),
               ),
           ),
         ],
         child: MaterialApp(
-          title: 'Conectados',
+          title: 'Dating App',
           debugShowCheckedModeBanner: false,
           theme: theme(),
           onGenerateRoute: AppRouter.onGenerateRoute,
-          initialRoute: OnboardingScreen.routeName,
+          initialRoute: SplashScreen.routeName,
         ),
       ),
     );

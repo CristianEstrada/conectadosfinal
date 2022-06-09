@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../models/models.dart';
-import '../../repositories/repositories.dart';
+import '/repositories/repositories.dart';
+import '/models/models.dart';
 
 part 'onboarding_event.dart';
 part 'onboarding_state.dart';

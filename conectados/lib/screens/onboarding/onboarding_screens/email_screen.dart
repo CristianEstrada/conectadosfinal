@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
 
-import 'package:conectados/cubits/signup/signup_cubit.dart';
-import 'package:conectados/screens/onboarding/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
+import '/cubits/cubits.dart';
+import '/screens/onboarding/widgets/widgets.dart';
 
 class Email extends StatelessWidget {
   final TabController tabController;
@@ -19,34 +19,26 @@ class Email extends StatelessWidget {
     return BlocBuilder<SignupCubit, SignupState>(
       builder: (context, state) {
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
+          padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomTextHeader(
-                    text: '¿Cual Es Tu Dirección De Correo Electronico?',
-                  ),
+                  CustomTextHeader(text: 'What\'s Your Email Address?'),
                   CustomTextField(
-                    hint: 'INGRESA TU CORREO ELECTRONICO',
+                    hint: 'ENTER YOUR EMAIL',
                     onChanged: (value) {
                       context.read<SignupCubit>().emailChanged(value);
-                      print(state.email);
                     },
                   ),
-                  SizedBox(
-                    height: 100,
-                  ),
-                  CustomTextHeader(
-                    text: '¿Crea Tu Contraseña?',
-                  ),
+                  SizedBox(height: 100),
+                  CustomTextHeader(text: 'Choose a Password'),
                   CustomTextField(
-                    hint: 'INGRESA TU CONTRASEÑA',
+                    hint: 'ENTER YOUR PASSWORD',
                     onChanged: (value) {
                       context.read<SignupCubit>().passwordChanged(value);
-                      print(state.password);
                     },
                   ),
                 ],
@@ -56,16 +48,11 @@ class Email extends StatelessWidget {
                   StepProgressIndicator(
                     totalSteps: 6,
                     currentStep: 1,
-                    selectedColor: Theme.of(context).primaryColorDark,
+                    selectedColor: Theme.of(context).primaryColor,
                     unselectedColor: Theme.of(context).backgroundColor,
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  CustomButton(
-                    tabController: tabController,
-                    text: 'Siguiente paso',
-                  ),
+                  SizedBox(height: 10),
+                  CustomButton(tabController: tabController, text: 'NEXT STEP'),
                 ],
               ),
             ],

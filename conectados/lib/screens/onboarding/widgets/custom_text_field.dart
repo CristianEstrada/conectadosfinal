@@ -1,16 +1,12 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hint;
-  final TextEditingController? controller;
   final Function(String)? onChanged;
 
-  const CustomTextField({
+  CustomTextField({
     Key? key,
     required this.hint,
-    this.controller,
     this.onChanged,
   }) : super(key: key);
 

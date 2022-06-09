@@ -1,97 +1,53 @@
-// ignore_for_file: override_on_non_overriding_member
-
 import 'package:bloc/bloc.dart';
-import 'package:conectados/blocs/auth/auth_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'dart:async';
-import '../../models/models.dart';
-import '../../repositories/repositories.dart';
+import 'package:conectados/models/models.dart';
 
 part 'swipe_event.dart';
 part 'swipe_state.dart';
 
 class SwipeBloc extends Bloc<SwipeEvent, SwipeState> {
-  final AuthBloc _authBloc;
-  final DatabaseRepository _databaseRepository;
-  StreamSubscription? _authSubscription;
-
-  SwipeBloc({
-    required AuthBloc authBloc,
-    required DatabaseRepository databaseRepository,
-  })  : _authBloc = authBloc,
-        _databaseRepository = databaseRepository,
-        super(SwipeLoading()) {
-    on<LoadUsers>(_onLoadUsers);
-    on<UpdateHome>(_onUpdateHome);
-    on<SwipeLeft>(_onSwipeLeft);
-    on<SwipeRight>(_onSwipeRight);
-
-    _authSubscription = _authBloc.stream.listen((state) {
-      if (state.status == AuthStatus.authenticated) {
-        add(LoadUsers(userId: state.user!.uid));
-      }
-    });
+  SwipeBloc() : super(SwipeLoading()) {
+    on<LoadUsersEvent>(_onLoadUsersEvent);
+    on<SwipeLeftEvent>(_onSwipeLeftEvent);
+    on<SwipeRightEvent>(_onSwipeRightEvent);
   }
 
-  void _onLoadUsers(
-    LoadUsers event,
+  void _onLoadUsersEvent(
+    LoadUsersEvent event,
     Emitter<SwipeState> emit,
   ) {
-    _databaseRepository.getUsers(event.userId, 'Masculino').listen((users) {
-      print('$users');
-      add(
-        UpdateHome(users: users),
-      );
-    });
+    emit(SwipeLoaded(users: event.users));
   }
 
-  void _onUpdateHome(
-    UpdateHome event,
-    Emitter<SwipeState> emit,
-  ) {
-    if (event.users != null) {
-      emit(SwipeLoaded(users: event.users!));
-    } else {
-      emit(SwipeError());
-    }
-  }
-
-  void _onSwipeLeft(
-    SwipeLeft event,
+  void _onSwipeLeftEvent(
+    SwipeLeftEvent event,
     Emitter<SwipeState> emit,
   ) {
     if (state is SwipeLoaded) {
       final state = this.state as SwipeLoaded;
-
-      List<User> users = List.from(state.users)..remove(event.user);
-
-      if (users.isNotEmpty) {
-        emit(SwipeLoaded(users: users));
-      } else {
-        emit(SwipeError());
-      }
+      try {
+        emit(
+          SwipeLoaded(
+            users: List.from(state.users)..remove(event.user),
+          ),
+        );
+      } catch (_) {}
     }
   }
 
-  void _onSwipeRight(
-    SwipeRight event,
+  void _onSwipeRightEvent(
+    SwipeRightEvent event,
     Emitter<SwipeState> emit,
   ) {
     if (state is SwipeLoaded) {
       final state = this.state as SwipeLoaded;
-      List<User> users = List.from(state.users)..remove(event.user);
-
-      if (users.isNotEmpty) {
-        emit(SwipeLoaded(users: users));
-      } else {
-        emit(SwipeError());
-      }
+      try {
+        emit(
+          SwipeLoaded(
+            users: List.from(state.users)..remove(event.user),
+          ),
+        );
+      } catch (_) {}
     }
-  }
-
-  @override
-  Future<void> close() async {
-    _authSubscription?.cancel();
-    super.close();
   }
 }

@@ -1,12 +1,8 @@
-// ignore_for_file: prefer_const_constructors
-
-import 'package:bloc/bloc.dart';
-import 'package:conectados/blocs/blocs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
-
-import '../widgets/widgets.dart';
+import '/blocs/blocs.dart';
+import '/screens/onboarding/widgets/widgets.dart';
 
 class Pictures extends StatelessWidget {
   final TabController tabController;
@@ -67,14 +63,14 @@ class Pictures extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     CustomButton(
-                        tabController: tabController, text: 'Siguiente'),
+                        tabController: tabController, text: 'NEXT STEP'),
                   ],
                 ),
               ],
             ),
           );
         } else {
-          return Text('Algo ha salido mal.');
+          return Text('Something went wrong.');
         }
       },
     );

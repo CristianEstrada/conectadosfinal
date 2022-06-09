@@ -1,11 +1,9 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
-import '../../../blocs/blocs.dart';
-import '../widgets/widgets.dart';
+import '/blocs/blocs.dart';
+import '/screens/onboarding/widgets/widgets.dart';
 
 class Demo extends StatelessWidget {
   final TabController tabController;
@@ -34,47 +32,34 @@ class Demo extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomTextHeader(text: 'What\'s Your Name?'),
-                    SizedBox(height: 20),
-                    CustomTextField(
-                      hint: 'ENTER YOUR NAME',
-                      onChanged: (value) {
-                        context.read<OnboardingBloc>().add(
-                              UpdateUser(
-                                user: state.user.copyWith(name: value),
-                              ),
-                            );
-                      },
-                    ),
-                    SizedBox(height: 50),
-                    CustomTextHeader(text: '¿Cual Es Tu Genero?'),
+                    CustomTextHeader(text: 'What\'s Your Gender?'),
                     SizedBox(height: 20),
                     CustomCheckbox(
-                      text: 'MASCULINO',
-                      value: state.user.gender == 'Masculino',
+                      text: 'MALE',
+                      value: state.user.gender == 'Male',
                       onChanged: (bool? newValue) {
                         context.read<OnboardingBloc>().add(
                               UpdateUser(
-                                user: state.user.copyWith(gender: 'Masculino'),
+                                user: state.user.copyWith(gender: 'Male'),
                               ),
                             );
                       },
                     ),
                     CustomCheckbox(
-                      text: 'FEMENINO',
-                      value: state.user.gender == 'Femenino',
+                      text: 'FEMALE',
+                      value: state.user.gender == 'Female',
                       onChanged: (bool? newValue) {
                         context.read<OnboardingBloc>().add(
                               UpdateUser(
-                                user: state.user.copyWith(gender: 'Femenino'),
+                                user: state.user.copyWith(gender: 'Female'),
                               ),
                             );
                       },
                     ),
-                    SizedBox(height: 50),
-                    CustomTextHeader(text: '¿Que Edad Tienes?'),
+                    SizedBox(height: 100),
+                    CustomTextHeader(text: 'What\'s Your Age?'),
                     CustomTextField(
-                      hint: 'INGRESA TU EDAD AQUI...',
+                      hint: 'ENTER YOUR AGE',
                       onChanged: (value) {
                         context.read<OnboardingBloc>().add(
                               UpdateUser(
@@ -91,19 +76,19 @@ class Demo extends StatelessWidget {
                     StepProgressIndicator(
                       totalSteps: 6,
                       currentStep: 3,
-                      selectedColor: Theme.of(context).primaryColorDark,
+                      selectedColor: Theme.of(context).primaryColor,
                       unselectedColor: Theme.of(context).backgroundColor,
                     ),
                     SizedBox(height: 10),
                     CustomButton(
-                        tabController: tabController, text: 'Siguiente'),
+                        tabController: tabController, text: 'NEXT STEP'),
                   ],
                 ),
               ],
             ),
           );
         } else {
-          return Text('Algo ha ido mal.');
+          return Text('Something went wrong.');
         }
       },
     );

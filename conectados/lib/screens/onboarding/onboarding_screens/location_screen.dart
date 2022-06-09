@@ -1,11 +1,8 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:conectados/blocs/blocs.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
-
-import '../../../blocs/blocs.dart';
-import '../widgets/widgets.dart';
+import '/screens/onboarding/widgets/widgets.dart';
 
 class Location extends StatelessWidget {
   final TabController tabController;
@@ -34,9 +31,9 @@ class Location extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomTextHeader(text: '¿De Donde Eres?'),
+                    CustomTextHeader(text: 'Where Are You?'),
                     CustomTextField(
-                      hint: 'Ingresa Tu Ubicación',
+                      hint: 'ENTER YOUR LOCATION',
                       onChanged: (value) {
                         context.read<OnboardingBloc>().add(
                               UpdateUser(
@@ -56,15 +53,14 @@ class Location extends StatelessWidget {
                       unselectedColor: Theme.of(context).backgroundColor,
                     ),
                     SizedBox(height: 10),
-                    CustomButton(
-                        tabController: tabController, text: 'Terminado'),
+                    CustomButton(tabController: tabController, text: 'DONE'),
                   ],
                 ),
               ],
             ),
           );
         } else {
-          return Text('Algo ha salido mal.');
+          return Text('Something went wrong.');
         }
       },
     );

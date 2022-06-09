@@ -1,9 +1,6 @@
-// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
-
-import 'package:conectados/blocs/blocs.dart';
-import 'package:conectados/repositories/storage/storage_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:conectados/blocs/blocs.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CustomImageContainer extends StatelessWidget {
@@ -34,7 +31,7 @@ class CustomImageContainer extends StatelessWidget {
                 child: IconButton(
                   icon: Icon(
                     Icons.add_circle,
-                    color: Theme.of(context).primaryColorDark,
+                    color: Theme.of(context).accentColor,
                   ),
                   onPressed: () async {
                     ImagePicker _picker = ImagePicker();
@@ -44,12 +41,12 @@ class CustomImageContainer extends StatelessWidget {
                     );
 
                     if (_image == null) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text('No hay una imagen seleccionada.')));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('No image was selected.')));
                     }
 
                     if (_image != null) {
-                      print('Cargando ...');
+                      print('Uploading ...');
                       BlocProvider.of<OnboardingBloc>(context).add(
                         UpdateUserImages(image: _image),
                       );

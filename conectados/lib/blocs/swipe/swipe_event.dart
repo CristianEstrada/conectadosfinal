@@ -1,54 +1,41 @@
-// ignore_for_file: prefer_const_constructors_in_immutables
-
 part of 'swipe_bloc.dart';
 
 abstract class SwipeEvent extends Equatable {
   const SwipeEvent();
 
   @override
-  List<Object?> get props => [];
+  List<Object> get props => [];
 }
 
-class LoadUsers extends SwipeEvent {
-  final String userId;
+class LoadUsersEvent extends SwipeEvent {
+  final List<User> users;
 
-  LoadUsers({
-    required this.userId,
-  });
-
-  @override
-  List<Object?> get props => [userId];
-}
-
-class UpdateHome extends SwipeEvent {
-  final List<User>? users;
-
-  UpdateHome({
+  LoadUsersEvent({
     required this.users,
   });
 
   @override
-  List<Object?> get props => [users];
+  List<Object> get props => [users];
 }
 
-class SwipeLeft extends SwipeEvent {
+class SwipeLeftEvent extends SwipeEvent {
   final User user;
 
-  SwipeLeft({
+  SwipeLeftEvent({
     required this.user,
   });
 
   @override
-  List<Object?> get props => [user];
+  List<Object> get props => [user];
 }
 
-class SwipeRight extends SwipeEvent {
+class SwipeRightEvent extends SwipeEvent {
   final User user;
 
-  SwipeRight({
+  SwipeRightEvent({
     required this.user,
   });
 
   @override
-  List<Object?> get props => [user];
+  List<Object> get props => [user];
 }

@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:conectados/repositories/repositories.dart';
 import 'package:equatable/equatable.dart';
-
+import 'package:conectados/repositories/auth/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 part 'signup_state.dart';

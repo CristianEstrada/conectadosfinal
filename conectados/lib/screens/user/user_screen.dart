@@ -5,19 +5,19 @@ import 'package:conectados/widgets/choice_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class UserScreen extends StatelessWidget {
+class UsersScreen extends StatelessWidget {
   static const String routeName = "/users";
 
   static Route route({required User user}) {
     return MaterialPageRoute(
       settings: RouteSettings(name: routeName),
-      builder: (context) => UserScreen(user: user),
+      builder: (context) => UsersScreen(user: user),
     );
   }
 
   final User user;
 
-  const UserScreen({required this.user});
+  const UsersScreen({required this.user});
 
   @override
   Widget build(BuildContext context) {

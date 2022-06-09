@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors_in_immutables
-
 import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 
@@ -11,38 +9,101 @@ class Message extends Equatable {
   final DateTime dateTime;
   final String timeString;
 
-  Message(
-      {required this.id,
-      required this.senderId,
-      required this.receiverId,
-      required this.message,
-      required this.dateTime,
-      required this.timeString});
+  Message({
+    required this.id,
+    required this.senderId,
+    required this.receiverId,
+    required this.message,
+    required this.dateTime,
+    required this.timeString,
+  });
 
   @override
-  List<Object?> get props =>
-      [id, senderId, receiverId, message, dateTime, timeString];
+  List<Object?> get props => [
+        id,
+        senderId,
+        receiverId,
+        message,
+        dateTime,
+        timeString,
+      ];
 
   static List<Message> messages = [
     Message(
         id: 1,
         senderId: 1,
         receiverId: 2,
-        message: 'Hola, como estas?',
+        message: 'Hey, how are you?',
         dateTime: DateTime.now(),
         timeString: DateFormat('jm').format(DateTime.now())),
     Message(
         id: 2,
         senderId: 2,
         receiverId: 1,
-        message: 'bien, y tu como estas?',
+        message: 'I\'m good, thank you.',
         dateTime: DateTime.now(),
         timeString: DateFormat('jm').format(DateTime.now())),
     Message(
         id: 3,
         senderId: 1,
         receiverId: 2,
-        message: 'tambien estoy bien, gracias',
+        message: 'I\'m good, as well. Thank you.',
+        dateTime: DateTime.now(),
+        timeString: DateFormat('jm').format(DateTime.now())),
+    Message(
+        id: 4,
+        senderId: 1,
+        receiverId: 3,
+        message: 'Hey, how are you?',
+        dateTime: DateTime.now(),
+        timeString: DateFormat('jm').format(DateTime.now())),
+    Message(
+        id: 5,
+        senderId: 3,
+        receiverId: 1,
+        message: 'I\'m good, thank you.',
+        dateTime: DateTime.now(),
+        timeString: DateFormat('jm').format(DateTime.now())),
+    Message(
+        id: 6,
+        senderId: 1,
+        receiverId: 5,
+        message: 'Hey, how are you?',
+        dateTime: DateTime.now(),
+        timeString: DateFormat('jm').format(DateTime.now())),
+    Message(
+        id: 7,
+        senderId: 5,
+        receiverId: 1,
+        message: 'I\'m good, thank you.',
+        dateTime: DateTime.now(),
+        timeString: DateFormat('jm').format(DateTime.now())),
+    Message(
+        id: 8,
+        senderId: 1,
+        receiverId: 6,
+        message: 'Hey, how are you?',
+        dateTime: DateTime.now(),
+        timeString: DateFormat('jm').format(DateTime.now())),
+    Message(
+        id: 9,
+        senderId: 6,
+        receiverId: 1,
+        message: 'I\'m good, thank you.',
+        dateTime: DateTime.now(),
+        timeString: DateFormat('jm').format(DateTime.now())),
+    Message(
+        id: 10,
+        senderId: 1,
+        receiverId: 7,
+        message: 'Hey, how are you?',
+        dateTime: DateTime.now(),
+        timeString: DateFormat('jm').format(DateTime.now())),
+    Message(
+        id: 11,
+        senderId: 7,
+        receiverId: 1,
+        message: 'I\'m good, thank you.',
         dateTime: DateTime.now(),
         timeString: DateFormat('jm').format(DateTime.now())),
   ];
