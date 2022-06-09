@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables
 
 import 'package:conectados/widgets/custom_appbar.dart';
-import 'package:conectados/widgets/user_image_small.dart';
+import 'package:conectados/widgets/user_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -30,7 +30,6 @@ class MatchesScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         title: 'ENCUENTROS',
-        iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -54,7 +53,7 @@ class MatchesScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
-                        UserImageSmall(
+                        UserImage.small(
                             height: 70,
                             width: 70,
                             url: inactiveMatches[index]
@@ -90,7 +89,8 @@ class MatchesScreen extends StatelessWidget {
                     },
                     child: Row(
                       children: [
-                        UserImageSmall(
+                        UserImage.small(
+                          margin: const EdgeInsets.only(top: 10, right: 10),
                           height: 70,
                           width: 70,
                           url: activeMatches[index].matchedUser.imageUrls[0],
@@ -98,35 +98,23 @@ class MatchesScreen extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(activeMatches[index].matchedUser.name,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline5!
-                                    .copyWith(color: Colors.black87)),
-                            SizedBox(
-                              height: 5,
-                            ),
                             Text(
-                                activeMatches[index]
-                                    .chat![0]
-                                    .messages[0]
-                                    .message,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline6!
-                                    .copyWith(color: Colors.black54)),
-                            SizedBox(
-                              height: 5,
+                              activeMatches[index].matchedUser.name,
+                              style: Theme.of(context).textTheme.headline5,
                             ),
+                            SizedBox(height: 5),
                             Text(
-                                activeMatches[index]
-                                    .chat![0]
-                                    .messages[0]
-                                    .timeString,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1!
-                                    .copyWith(color: Colors.black54)),
+                              activeMatches[index].chat![0].messages[0].message,
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                            SizedBox(height: 5),
+                            Text(
+                              activeMatches[index]
+                                  .chat![0]
+                                  .messages[0]
+                                  .timeString,
+                              style: Theme.of(context).textTheme.bodyText1,
+                            ),
                           ],
                         )
                       ],

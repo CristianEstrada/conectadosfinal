@@ -5,10 +5,10 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 import '../widgets/widgets.dart';
 
-class Biography extends StatelessWidget {
+class Bio extends StatelessWidget {
   final TabController tabController;
 
-  const Biography({
+  const Bio({
     Key? key,
     required this.tabController,
   }) : super(key: key);

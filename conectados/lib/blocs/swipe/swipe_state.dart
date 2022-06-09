@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 part of 'swipe_bloc.dart';
 
 abstract class SwipeState extends Equatable {
@@ -12,9 +14,10 @@ class SwipeLoading extends SwipeState {}
 class SwipeLoaded extends SwipeState {
   final List<User> users;
 
-  const SwipeLoaded({
+  SwipeLoaded({
     required this.users,
   });
+
   @override
   List<Object> get props => [users];
 }

@@ -1,40 +1,66 @@
-// ignore_for_file: prefer_const_constructors
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:conectados/models/models.dart';
+import '../../../blocs/blocs.dart';
 import '../../../cubits/signup/signup_cubit.dart';
 
 class CustomButton extends StatelessWidget {
   final TabController tabController;
-
   final String text;
-  const CustomButton({
+  final void function;
+
+  CustomButton({
     Key? key,
     required this.tabController,
-    this.text = 'Iniciar',
+    required this.text,
+    this.function,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5.0),
-        gradient: LinearGradient(colors: [
-          Theme.of(context).primaryColor,
-          Theme.of(context).primaryColorDark,
-        ]),
+        borderRadius: BorderRadius.circular(5),
+        gradient: LinearGradient(
+          colors: [
+            Theme.of(context).primaryColor,
+            Theme.of(context).primaryColorDark,
+          ],
+        ),
       ),
       child: ElevatedButton(
-        style:
-            ElevatedButton.styleFrom(elevation: 0, primary: Colors.transparent),
-        onPressed: () {
-          tabController.animateTo(tabController.index + 1);
+        onPressed: () async {
+          if (tabController.index == 5) {
+            Navigator.pushNamed(context, '/');
+          } else {
+            tabController.animateTo(tabController.index + 1);
+          }
+
           if (tabController.index == 2) {
-            context.read<SignupCubit>().signupWithCredentials();
+            await context.read<SignupCubit>().signUpWithCredentials();
+
+            User user = User(
+              id: context.read<SignupCubit>().state.user!.uid,
+              name: '',
+              age: 0,
+              gender: '',
+              imageUrls: [],
+              jobTitle: '',
+              interests: [],
+              bio: '',
+              location: '',
+            );
+            context.read<OnboardingBloc>().add(
+                  StartOnboarding(
+                    user: user,
+                  ),
+                );
           }
         },
+        style: ElevatedButton.styleFrom(
+          primary: Colors.transparent,
+          elevation: 0,
+        ),
         child: Container(
           width: double.infinity,
           child: Center(

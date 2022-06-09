@@ -20,8 +20,8 @@ class ProfileScreen extends StatelessWidget {
     final User user = User.users[0];
     return Scaffold(
       appBar: CustomAppBar(
-          title: 'PERFIL',
-          iconTheme: IconThemeData(color: Theme.of(context).primaryColor)),
+        title: 'PERFIL',
+      ),
       body: Column(
         children: [
           SizedBox(

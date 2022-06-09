@@ -41,6 +41,7 @@ class Start extends StatelessWidget {
           ]),
           CustomButton(
             tabController: tabController,
+            text: 'Iniciar',
           ),
         ],
       ),

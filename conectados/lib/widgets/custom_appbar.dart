@@ -6,34 +6,46 @@ import 'package:flutter_svg/flutter_svg.dart';
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
   final bool hasActions;
+
   const CustomAppBar({
     Key? key,
     required this.title,
     this.hasActions = true,
-    required IconThemeData iconTheme,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
       backgroundColor: Colors.transparent,
       elevation: 0,
+      centerTitle: false,
+      automaticallyImplyLeading: false,
       title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            child: SvgPicture.asset(
-              'assets/logo.svg',
-              height: 50,
+            child: InkWell(
+              onTap: () {
+                Navigator.popAndPushNamed(context, '/');
+              },
+              child: Container(
+                child: SvgPicture.asset(
+                  'assets/logo.svg',
+                  height: 50,
+                ),
+              ),
             ),
           ),
           Expanded(
-            flex: 3,
+            flex: 2,
             child: Text(
               title,
-              style: Theme.of(context).textTheme.headline2,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline2!
+                  .copyWith(color: Theme.of(context).primaryColor),
             ),
-          )
+          ),
         ],
       ),
       actions: hasActions
@@ -43,11 +55,15 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                     Icons.message,
                     color: Theme.of(context).primaryColorDark,
                   ),
-                  onPressed: () {}),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/matches');
+                  }),
               IconButton(
                   icon: Icon(Icons.person,
                       color: Theme.of(context).primaryColorDark),
-                  onPressed: () {}),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/profile');
+                  }),
             ]
           : null,
     );

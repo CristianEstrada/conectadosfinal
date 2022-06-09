@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, prefer_const_literals_to_create_immutables, avoid_single_cascade_in_expression_statements
 
 import 'package:conectados/blocs/swipe/swipe_bloc.dart';
 import 'package:flutter/material.dart';
@@ -6,16 +6,23 @@ import 'package:flutter/material.dart';
 import 'package:conectados/widgets/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../blocs/blocs.dart';
+import '../../models/models.dart';
+import '../onboarding/onboarding_screen.dart';
+
 class HomeScreen extends StatelessWidget {
   static const String routeName = "/";
 
-  HomeScreen({Key? key}) : super(key: key);
-
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
-      builder: (context) => HomeScreen(),
-    );
+        settings: RouteSettings(name: routeName),
+        builder: (context) {
+          print(BlocProvider.of<AuthBloc>(context).state.status);
+          return BlocProvider.of<AuthBloc>(context).state.status ==
+                  AuthStatus.unauthenticated
+              ? OnboardingScreen()
+              : HomeScreen();
+        });
   }
 
   @override
@@ -23,7 +30,6 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         title: 'CONECTADOS',
-        iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
       ),
       body: BlocBuilder<SwipeBloc, SwipeState>(
         builder: (context, state) {
@@ -32,6 +38,7 @@ class HomeScreen extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else if (state is SwipeLoaded) {
+            var userCount = state.users.length;
             return Column(
               children: [
                 InkWell(
@@ -39,19 +46,22 @@ class HomeScreen extends StatelessWidget {
                     Navigator.pushNamed(context, '/users',
                         arguments: state.users[0]);
                   },
-                  child: Draggable(
-                    feedback: UserCard(user: state.users[0]),
-                    childWhenDragging: UserCard(user: state.users[1]),
+                  child: Draggable<User>(
+                    data: state.users[0],
                     child: UserCard(user: state.users[0]),
+                    feedback: UserCard(user: state.users[0]),
+                    childWhenDragging: (userCount > 1)
+                        ? UserCard(user: state.users[1])
+                        : Container(),
                     onDragEnd: (drag) {
                       if (drag.velocity.pixelsPerSecond.dx < 0) {
-                        context
-                            .read<SwipeBloc>()
-                            .add(SwipeLeftEvent(user: state.users[0]));
+                        context.read<SwipeBloc>()
+                          ..add(SwipeLeft(user: state.users[0]));
+                        print('Swiped Left');
                       } else {
-                        context
-                            .read<SwipeBloc>()
-                            .add(SwipeRightEvent(user: state.users[0]));
+                        context.read<SwipeBloc>()
+                          ..add(SwipeRight(user: state.users[0]));
+                        print('Swiped Right');
                       }
                     },
                   ),
@@ -64,9 +74,9 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () {
-                          context
-                              .read<SwipeBloc>()
-                              .add(SwipeLeftEvent(user: state.users[0]));
+                          context.read<SwipeBloc>()
+                            ..add(SwipeLeft(user: state.users[0]));
+                          print('Slice a la Izquierda');
                         },
                         child: ChoiceButton(
                             width: 60,
@@ -78,9 +88,9 @@ class HomeScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          context
-                              .read<SwipeBloc>()
-                              .add(SwipeRightEvent(user: state.users[0]));
+                          context.read<SwipeBloc>()
+                            ..add(SwipeRight(user: state.users[0]));
+                          print('Slice a la derecha');
                         },
                         child: ChoiceButton(
                             width: 80,
@@ -101,6 +111,12 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ],
+            );
+          }
+          if (state is SwipeError) {
+            return Center(
+              child: Text('No hay mas usuarios para mostrar.',
+                  style: Theme.of(context).textTheme.headline4),
             );
           } else {
             return Text('Algo ha ido mal.');
